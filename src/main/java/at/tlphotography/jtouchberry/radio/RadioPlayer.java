@@ -1,8 +1,8 @@
-package at.tlphotography.jtouchberry.radio.ws;
+package at.tlphotography.jtouchberry.radio;
+
+import javax.annotation.PreDestroy;
 
 import org.springframework.stereotype.Component;
-
-import at.tlphotography.jtouchberry.radio.PlayerThread;
 
 @Component
 public class RadioPlayer {
@@ -26,7 +26,10 @@ public class RadioPlayer {
 	public void stop() {
 		if (thread != null)
 			thread.stop();
-
 	}
 
+	@PreDestroy
+	public void destroy() {
+		thread.stop();
+	}
 }

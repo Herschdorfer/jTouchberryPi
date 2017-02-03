@@ -41,6 +41,7 @@ public class PlayerThread implements Runnable {
 
 		try {
 			player.play();
+
 		} catch (JavaLayerException e) {
 			System.out.println(e.getMessage());
 		}
@@ -49,6 +50,7 @@ public class PlayerThread implements Runnable {
 
 	public void stop() {
 		player.close();
+		player = null;
 
 	}
 }

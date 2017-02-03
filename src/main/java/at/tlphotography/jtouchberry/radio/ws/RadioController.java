@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import at.tlphotography.jtouchberry.radio.Audio;
+import at.tlphotography.jtouchberry.radio.RadioPlayer;
 import at.tlphotography.jtouchberry.radio.db.Radio;
 import at.tlphotography.jtouchberry.radio.db.RadioDao;
 
@@ -16,6 +18,11 @@ public class RadioController {
 
 	@Autowired
 	private RadioPlayer player;
+
+	@Autowired
+	private Audio audio;
+
+	private Float volume;
 
 	@RequestMapping("/radio/")
 	@ResponseBody
@@ -48,5 +55,26 @@ public class RadioController {
 			return "Error creating the user: " + ex.toString();
 		}
 		return "Radio succesfully created! (id = " + radio.getId() + ")";
+	}
+
+	@RequestMapping("/radio/setVolume")
+	@ResponseBody
+	public String setVolume(Float volume) {
+		this.volume = volume;
+		audio.setMasterOutputVolume(volume);
+		return "OK";
+	}
+
+	@RequestMapping("/radio/getVolume")
+	@ResponseBody
+	public Float getVolume() {
+		return volume;
+	}
+
+	@RequestMapping("/radio/getMixer")
+	@ResponseBody
+	public String setMixer() {
+
+		return audio.getHierarchyInfo();
 	}
 }
