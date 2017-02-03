@@ -52,8 +52,9 @@ $(document).ready(function() {
 	$("input[type=checkbox]").switchButton({
 		on_label : 'ON',
 		off_label : 'OFF',
-		width : "2",
-		height : "0.7",
+		width : "6",
+		height : "1.8",
+		button_width : "3",
 		size_unit : "em",
 	});
 

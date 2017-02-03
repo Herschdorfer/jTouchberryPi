@@ -15,8 +15,12 @@
 .heatingSwitches ul {
 	list-style-type: none;
 	margin: 0;
-	padding: 0;
 	overflow: hidden;
+	padding: 10px;
+}
+
+.switch-text {
+	font-size: 2em;
 }
 
 .heatingSwitches li {
@@ -27,6 +31,9 @@
 	list-style-position: inside;
 	border: 1px solid black;
 	border-radius: 20px;
+	-webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
 .switch {
@@ -124,3 +131,7 @@
 	padding: 14px 0px;
 }
 
+.login {
+    display: inline-block;
+    text-align: center;
+    }
