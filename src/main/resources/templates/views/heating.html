@@ -1,36 +1,23 @@
 <div th:fragment="heating" class="heatingSwitches">
-	<ul>
-		<li>
-			<div id="container">
-				<div>
-					<div class="switch-text">Relais 1</div>
-					<div class="switch-wrapper">
-						<input type="checkbox" value="1" id="relais1"></input>
-					</div>
+	<ul class="mainContainer" id="sortable">
+		<th:block th:each="equs: ${equipment}">
+			<li>
+				<div id="container">
+					<ul class="menu" id="menu">
+						<li style="width: 80%"><div th:text="${equs.name}" /></li>
+						<li class="buttonEdit" />
+						<li class="buttonDelete" />
+					</ul>
+					<th:block th:each="switch: ${equs.switches}">
+						<div>
+							<div class="switch-text" th:text="${switch.name}"></div>
+							<div class="switch-wrapper">
+								<input type="checkbox" value="1" th:id="${switch.id}"></input>
+							</div>
+						</div>
+					</th:block>
 				</div>
-				<div>
-					<div class="switch-text">Relais 2</div>
-					<div class="switch-wrapper">
-						<input type="checkbox" value="1" id="relais2"></input>
-					</div>
-				</div>
-			</div>
-		</li>
-		<li>
-			<div id="container">
-				<div>
-					<div class="switch-text">Switch 1</div>
-					<div class="switch-wrapper">
-						<input type="checkbox" value="1"></input>
-					</div>
-				</div>
-				<div>
-					<div class="switch-text">Switch 2</div>
-					<div class="switch-wrapper">
-						<input type="checkbox" value="1"></input>
-					</div>
-				</div>
-			</div>
-		</li>
+			</li>
+		</th:block>
 	</ul>
 </div>

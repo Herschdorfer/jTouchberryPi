@@ -47,6 +47,7 @@
             show_labels: true,			// Should we show the on and off labels?
             labels_placement: "both", 	// Position of the labels: "both", "left" or "right"
             on_label: "ON",				// Text to be displayed when checked
+            auto_label: "Auto",
             off_label: "OFF",			// Text to be displayed when unchecked
 
             size_unit: "em",			// Size Unit for the Switch
@@ -208,7 +209,7 @@
             });
 
             // Set switch value when clicking labels
-            this.on_label.click(function(e) {
+            this.on_label.click(function() {
                 if (self.options.checked && self.options.labels_placement === "both") {
                     return false;
                 }
@@ -217,7 +218,7 @@
                 return false;
             });
 
-            this.off_label.click(function(e) {
+            this.off_label.click(function() {
                 if (!self.options.checked && self.options.labels_placement === "both") {
                     return false;
                 }
@@ -253,7 +254,10 @@
 	        		return;
 
             this.options.checked = !this.options.checked;
-            var newLeft = "";
+            var newLeft;
+            
+            
+            
             if (this.options.checked) {
                 // Update the underlying checkbox state
                 this.element.prop("checked", true);
@@ -275,7 +279,8 @@
                 }
                 this.button_bg.addClass("checked");
                 //execute on state callback if its supplied
-                if(typeof this.options.on_callback === 'function') this.options.on_callback.call(this);
+                if(typeof this.options.on_callback === 'function') 
+                	this.options.on_callback.call(this);
             }
             else {
                 // Update the underlying checkbox state
@@ -296,7 +301,8 @@
                 }
                 this.button_bg.removeClass("checked");
                 //execute off state callback if its supplied
-                if(typeof this.options.off_callback === 'function') this.options.off_callback.call(this);
+                if(typeof this.options.off_callback === 'function') 
+                	this.options.off_callback.call(this);
             }
             // Animate the switch
             this.button.animate({ left: newLeft }, 250, "easeInOutCubic");
