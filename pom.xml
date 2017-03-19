@@ -8,6 +8,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.4.4.RELEASE</version>
+
 	</parent>
 	<dependencies>
 		<dependency>
@@ -49,10 +50,14 @@
 		</dependency>
 	</dependencies>
 	<build>
+		<finalName>jTouchberryPi</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+				</configuration>
 			</plugin>
 
 			<plugin>
