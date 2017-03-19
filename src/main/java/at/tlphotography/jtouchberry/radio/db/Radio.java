@@ -22,6 +22,7 @@ public class Radio {
 	private String uri;
 
 	public Radio() {
+	    //need to be public
 	}
 
 	public Radio(long id) {

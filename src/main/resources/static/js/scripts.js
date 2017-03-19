@@ -1,17 +1,78 @@
-$(document).ready(
-		function() {
+$(document).ready(function() {
 
-			$.get("/radio/", function(data) {
-				data.forEach(function(entry) {
-					console.log(entry);
-					$('.dropdown-radio').append(
-							"<a href='#' onclick='playRadio(" + entry.id
-									+ ");'>" + entry.name + "</a>");
-				});
-				$('.dropdown-radio').append(
-						"<a href='#' onclick='stopRadio();'>Stop Radio</a>");
-			});
+	$(function() {
+		$("#sortable").sortable({
+			revert : true
 		});
+
+		$("ul, li").disableSelection();
+	});
+
+	$("input[type=checkbox]").switchButton({
+		on_label : 'ON',
+		off_label : 'OFF',
+		width : "6",
+		height : "1.8",
+		button_width : "3",
+		size_unit : "em",
+	});
+
+	$("input[type=checkbox]").each(function() {
+		var input = this;
+		var result;
+		$.ajax({
+			url : "heating/equimpent/switches/" + input.id,
+			success : function(data) {
+				result = data;
+				$("input#" + input.id).switchButton({
+					off_callback : function() {
+						$.ajax({
+							url : result.offUri,
+						});
+					},
+					on_callback : function() {
+						$.ajax({
+							url : result.onUri,
+						});
+					}
+				});
+
+			}
+		});
+	});
+
+});
+
+/* RADIO Functions */
+
+function playRadio(id) {
+	$.get("/radio/play?id=" + id);
+}
+
+function stopRadio() {
+	$.get("/radio/stop");
+}
+
+var Timer_Started = true;
+var Timer = setTimeout(DoThis, 200);
+var Volume = 0.5;
+
+function DoThis() {
+	Timer_Started = false;
+	$.ajax({
+		url : "/radio/setVolume?volume=" + Volume
+	});
+}
+
+function setVolume(val) {
+
+	Volume = val;
+
+	if (!Timer_Started) {
+		Timer_Started = true;
+		Timer = setTimeout(DoThis, 200);
+	}
+}
 
 var dataStore = (function() {
 	var xml;
@@ -27,96 +88,59 @@ var dataStore = (function() {
 		getXml : function() {
 			if (xml)
 				return xml;
-			// else show some error that it isn't loaded yet;
+			else {
+				return 0.5;
+			}
 		}
 	};
 })();
 
-$(document).ready(function() {
+$(document).ready(
+		function() {
 
-	Volume = dataStore.getXml();
+			$('.deleteRadio').click(
+					function() {
 
-	$("#volume").slider({
-		min : 0,
-		max : 100,
-		value : 0,
-		range : "min",
-		animate : true,
-		slide : function(event, ui) {
-			setVolume((ui.value) / 100);
-		}
-	});
+						$.get('/radio/delete?id='
+								+ this.parentNode.parentNode.id,
+								function(data) {
+									console.log(data);
+								}, 'json' // I expect a JSON response
+						);
+					});
 
-	$("#volume").slider('value', Volume * 100);
+			$('#submitNewRadio').click(
+					function() {
+						$.post('/radio/add', $('form#radioForm').serialize(),
+								function(data) {
+									console.log(data);
+								}, 'json' // I expect a JSON response
+						);
+					});
 
-	$("input[type=checkbox]").switchButton({
-		on_label : 'ON',
-		off_label : 'OFF',
-		width : "6",
-		height : "1.8",
-		button_width : "3",
-		size_unit : "em",
-	});
+			$.get("/radio/", function(data) {
+				data.forEach(function(entry) {
+					$('.dropdown-radio').append(
+							"<a href='#' onclick='playRadio(" + entry.id
+									+ ");'>" + entry.name + "</a>");
+				});
 
-	var test = $('#relais1').switchButton({
-		off_callback : function(data) {
-			$.ajax({
-				url : "http://192.168.188.46/relay_1_off",
+				$('.dropdown-radio').append(
+						"<a href='#' onclick='stopRadio();'>Stop Radio</a>");
 			});
-		},
-		on_callback : function(data) {
-			$.ajax({
-				url : "http://192.168.188.46/relay_1_on",
+
+			Volume = dataStore.getXml();
+
+			$("#volume").slider({
+				min : 0,
+				max : 100,
+				value : 0,
+				range : "min",
+				animate : true,
+				slide : function(event, ui) {
+					setVolume((ui.value) / 100);
+				}
 			});
-		}
-	});
 
-	var test = $('#relais2').switchButton({
-		off_callback : function(data) {
-			$.ajax({
-				url : "http://192.168.188.46/relay_2_off",
-			});
-		},
-		on_callback : function(data) {
-			$.ajax({
-				url : "http://192.168.188.46/relay_2_on",
-			});
-		}
-	});
-
-});
-
-function playRadio(id) {
-	$.get("/radio/play?id=" + id, function(data) {
-
-	});
-};
-
-function stopRadio(id) {
-	$.get("/radio/stop", function(data) {
-
-	});
-};
-
-var Timer_Started = true;
-var Timer = setTimeout(DoThis, 200);
-var Volume;
-
-function DoThis() {
-	Timer_Started = false;
-	$.ajax({
-		url : "/radio/setVolume?volume=" + Volume
-	});
-}
-
-function setVolume(val) {
-
-	Volume = val;
-
-	if (Timer_Started) {
-
-	} else {
-		Timer_Started = true;
-		Timer = setTimeout(DoThis, 200);
-	}
-}
+			$("#volume").slider('value', Volume * 100);
+		});

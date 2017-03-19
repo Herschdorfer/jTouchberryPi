@@ -1,3 +1,53 @@
+#menu {
+	border: none;
+	padding: 2px;
+	margin: 5px 10px 5px 10px;
+	border-radius: 10px;
+	border: 1px solid lightgray;
+	box-shadow: brown;
+	box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2);
+	font-size: 1em;
+}
+
+#menuRadio {
+	border: none;
+	padding: 2px;
+	margin: 5px 10px 5px 10px;
+	/* border-radius: 10px; */
+	/* border: 1px solid lightgray; */
+	box-shadow: brown;
+	/* box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2); */
+	font-size: 1em;
+}
+
+.buttonEdit {
+	height: 20px;
+	width: 20px;
+	background: url('../images/edit.png') no-repeat center;
+	background-size: 20px;
+}
+
+.buttonDelete {
+	height: 20px;
+	width: 20px;
+	background: url('../images/delete.png') no-repeat center;
+	background-size: 20px;
+}
+
+.editRadio {
+	height: 20px;
+	width: 20px;
+	background: url('../images/edit.png') no-repeat center;
+	background-size: 20px;
+}
+
+.deleteRadio {
+	height: 20px;
+	width: 20px;
+	background: url('../images/delete.png') no-repeat center;
+	background-size: 20px;
+}
+
 #container {
 	overflow: hidden;
 	font-size: 0.8em;
@@ -6,10 +56,42 @@
 #container div {
 	overflow: hidden;
 	padding-left: 5px;
+	/* margin: auto; */
+	/* width: 100%; */
+}
+
+#menu div {
+	margin: auto;
+	/* width: 50%; */
+	/* border: 3px solid green; */
+	padding: 2px;
+	margin-left: 10px;
 }
 
 #container div div {
 	float: left;
+}
+
+
+.radios ul {
+	list-style-type: none;
+	margin: 0;
+	overflow: hidden;
+	padding: 10px;
+}
+
+.radios li {
+	/* float: left; */
+	display: block;
+	margin: 5px;
+	padding: 5px;
+	list-style-position: inside;
+	border: 1px solid lightgray;
+	border-radius: 20px;
+	-webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
 }
 
 .heatingSwitches ul {
@@ -19,21 +101,34 @@
 	padding: 10px;
 }
 
-.switch-text {
-	font-size: 2em;
-}
-
 .heatingSwitches li {
 	float: left;
 	display: block;
-	margin: 10px;
-	padding: 10px;
+	margin: 5px;
+	padding: 5px;
 	list-style-position: inside;
-	border: 1px solid black;
+	border: 1px solid lightgray;
 	border-radius: 20px;
 	-webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 	-moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-	box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+.switch-text {
+	font-size: 2em;
+	/* margin: 4px; */
+	margin: 3px 3px 3px 4px;
+}
+
+.menu li {
+	float: left;
+	border: none;
+	box-shadow: none;
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+	/* margin: auto; */
 }
 
 .switch {
@@ -132,6 +227,6 @@
 }
 
 .login {
-    display: inline-block;
-    text-align: center;
-    }
+	display: inline-block;
+	text-align: center;
+}

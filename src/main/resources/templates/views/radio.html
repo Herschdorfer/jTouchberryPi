@@ -1,0 +1,26 @@
+<div th:fragment="radio" class="radios">
+	<ul class="mainContainer">
+		<th:block th:each="radio: ${radioList}">
+			<li>
+				<div id="container" th:id="${radio.id}">
+					<ul class="menu" id="menuRadio">
+						<li style="width: 80%"><div th:text="${radio.name}" /><div th:text="${radio.uri}" /></li>
+						<li class="deleteRadio" />
+					</ul>
+				</div>
+			</li>
+		</th:block>
+	</ul>
+	<form action="#" method="post" id="radioForm">
+		<p>
+			Name: <input type="text" name="name" />
+		</p>
+		<p>
+			URI: <input type="text" name="uri" />
+		</p>
+		<p>
+			<input id="submitNewRadio" type="submit" value="Submit" /> <input
+				type="reset" value="Reset" />
+		</p>
+	</form>
+</div>
