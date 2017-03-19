@@ -28,11 +28,17 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.Mixer.Info;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import at.tlphotography.jtouchberry.ScheduledTasks;
+
 @Component
 public class Audio {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Audio.class);
 
     @Value("${soundmixer}")
     private String masterstring = null;
@@ -108,7 +114,11 @@ public class Audio {
 	for (Mixer mixer : getMixers()) {
 
 	    for (Line line : getAvailableOutputLines(mixer)) {
+
+		LOGGER.info(line.getLineInfo().toString());
+
 		if (line.getLineInfo().toString().contains(masterstring))
+
 		    return line;
 	    }
 	}
