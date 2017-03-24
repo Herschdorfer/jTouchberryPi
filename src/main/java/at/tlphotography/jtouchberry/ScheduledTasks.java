@@ -26,7 +26,7 @@ public class ScheduledTasks {
 	LOGGER.info(Audio.getHierarchyInfo());
     }
 
-    @Scheduled(cron = "0 * * * * *")
+    //@Scheduled(cron = "0 * * * * *")
     public void reportCurrentTime() {
 	HashMap<Integer, String> zamgLinks = new HashMap<>();
 	zamgLinks.put(1, "http://www.zamg.ac.at/cms/de/wetter/wetter-oesterreich/wien/heute_vormittag");
