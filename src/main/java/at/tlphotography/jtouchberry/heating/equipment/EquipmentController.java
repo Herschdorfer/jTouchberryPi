@@ -7,7 +7,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +17,10 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import at.tlphotography.jtouchberry.heating.equipment.db.Equipment;
 import at.tlphotography.jtouchberry.heating.equipment.db.EquipmentDao;
-import at.tlphotography.jtouchberry.heating.equipment.db.SwitchDao;
-import at.tlphotography.jtouchberry.heating.equipment.db.Switch;
 import at.tlphotography.jtouchberry.heating.equipment.db.Sensor;
 import at.tlphotography.jtouchberry.heating.equipment.db.SensorDao;
+import at.tlphotography.jtouchberry.heating.equipment.db.Switch;
+import at.tlphotography.jtouchberry.heating.equipment.db.SwitchDao;
 
 @Controller
 public class EquipmentController {

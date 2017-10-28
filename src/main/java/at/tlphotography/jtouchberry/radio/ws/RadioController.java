@@ -95,6 +95,6 @@ public class RadioController {
     @ResponseBody
     public String setMixer() {
 
-	return audio.getHierarchyInfo();
+	return Audio.getHierarchyInfo();
     }
 }
