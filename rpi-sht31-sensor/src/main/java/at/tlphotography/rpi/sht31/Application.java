@@ -8,8 +8,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class Application {
 
-    private Application() {
-
+    public Application() { //NOSONARQUBE spring need this
+	
     }
 
     public static void main(String[] args) {
