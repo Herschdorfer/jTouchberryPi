@@ -33,9 +33,13 @@ public class SensorDataController {
 	config[0] = (byte) 0x2C;
 	config[1] = (byte) 0x06;
 	device.write(config, 0, 2);
+	Thread.sleep(500);
 
+	// Read 6 bytes of data
+	// temp msb, temp lsb, temp CRC, humidity msb, humidity lsb, humidity
+	// CRC
 	byte[] data = new byte[6];
-	device.read(config, 0, 2, data, 0, 6);
+	device.read(data, 0, 6);
 
 	// Convert the data
 	double cTemp = ((((data[0] & 0xFF) * 256) + (data[1] & 0xFF)) * 175.0) / 65535.0 - 45.0;
