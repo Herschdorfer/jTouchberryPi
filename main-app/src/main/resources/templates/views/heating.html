@@ -1,0 +1,23 @@
+<div th:fragment="heating" class="heatingSwitches">
+	<ul class="mainContainer" id="sortable">
+		<th:block th:each="equs: ${equipment}">
+			<li>
+				<div id="container">
+					<ul class="menu" id="menu">
+						<li style="width: 80%"><div th:text="${equs.name}" /></li>
+						<li class="buttonEdit" />
+						<li class="buttonDelete" />
+					</ul>
+					<th:block th:each="switch: ${equs.switches}">
+						<div>
+							<div class="switch-text" th:text="${switch.name}"></div>
+							<div class="switch-wrapper">
+								<input type="checkbox" value="1" th:id="${switch.id}"></input>
+							</div>
+						</div>
+					</th:block>
+				</div>
+			</li>
+		</th:block>
+	</ul>
+</div>
