@@ -7,7 +7,7 @@ public class Sensor {
 
     public Sensor(String name, SensorData... data) {
 	this.name = name;
-	
+
 	this.data = data;
     }
 
