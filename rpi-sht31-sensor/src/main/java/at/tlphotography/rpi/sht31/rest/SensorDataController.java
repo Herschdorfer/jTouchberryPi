@@ -10,13 +10,14 @@ import com.pi4j.io.i2c.I2CDevice;
 import com.pi4j.io.i2c.I2CFactory;
 import com.pi4j.io.i2c.I2CFactory.UnsupportedBusNumberException;
 
-import at.tlphotography.rpi.sht31.data.SensorData;
+import at.tlphotography.rpi.data.Sensor;
+import at.tlphotography.rpi.data.SensorData;
 
 @RestController
 public class SensorDataController {
 
     @RequestMapping("/data")
-    public SensorData getData() throws UnsupportedBusNumberException, IOException, InterruptedException {
+    public Sensor getData() throws UnsupportedBusNumberException, IOException, InterruptedException {
 
 	
 	// Code from https://raw.githubusercontent.com/ControlEverythingCommunity/SHT31/master/Java/SHT31.java
@@ -44,6 +45,9 @@ public class SensorDataController {
 	double cTemp = ((((data[0] & 0xFF) * 256) + (data[1] & 0xFF)) * 175.0) / 65535.0 - 45.0;
 	double humidity = ((((data[3] & 0xFF) * 256) + (data[4] & 0xFF)) * 100.0) / 65535.0;
 
-	return new SensorData(cTemp, humidity);
+	
+	SensorData[] dataArray = {new SensorData("Humidity", humidity), new SensorData("Temperature", cTemp)};
+	
+	return new Sensor("sht31-d", dataArray);
     }
 }
